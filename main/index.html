@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoreo de Temperatura y Humedad en tiempo real</title>
+    <style>
+        /* Estilos para el contenedor principal */
+        .container {
+            text-align: center;
+            margin-top: 50px;
+            font-family: 'Arial Narrow Bold';
+        }
+
+        .title{
+            font-size: 36px;
+            font-weight: bold;
+            color: rgb(217, 35, 35);
+        }
+
+        /* Estilos para los valores de temperatura y humedad */
+        .value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Estilos para las etiquetas de temperatura y humedad */
+        .label {
+            font-size: 20px;
+            color: #597;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
+        /* Estilos para los iconos */
+        .icon {
+            font-size: 48px;
+            color: #289;
+            margin: 10px;
+        }
+    </style>
+    <!-- Incluir librería de iconos (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Incluir jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Temperatura y Humedad en Tiempo Real</h1>
+        <div>
+            <span class="label">Temperatura:</span>
+            <i class="icon fas fa-thermometer-half"></i>
+            <span id="temperature" class="value"></span>
+            <span class="unit">°C</span>
+        </div>
+        <div>
+            <span class="label">Humedad:</span>
+            <i class="icon fas fa-tint"></i>
+            <span id="humidity" class="value"></span>
+            <span class="unit">%</span>
+        </div>
+
+        <script>
+            // JavaScript para actualizar los valores de temperatura y humedad
+            function updateData(temperature, humidity) {
+                document.getElementById("temperature").innerText = temperature.toFixed(1);
+                document.getElementById("humidity").innerText = humidity.toFixed(1);
+            }
+            // Actualización de datos en tiempo real
+            setInterval(function() {
+                $.get("/value", function(data) {
+                   // Convertir la respuesta JSON en un objeto JavaScript
+                    var response = JSON.parse(data); 
+
+                    // Obtener los valores de temperatura y humedad del objeto
+                    var temperature = response.temperature;
+                    var humidity = response.humidity;
+
+                    // Actualizar los valores en la página HTML
+                    updateData(temperature, humidity);
+                });
+            }, 5000); // Actualizar cada 1 min (ajustar según tus necesidades)
+        </script>
+    </div>
+</body>
+</html>
