@@ -1,6 +1,6 @@
-# Monitor de Temperatura y Humedad en Tiempo Real
+# Dispositivo IoT para Monitoreo de Temperatura y Humedad en Tiempo Real
 
-Este es un programa que muestra la temperatura y humedad en tiempo real utilizando un sensor DHT22 conectado a un dispositivo ESP32. El programa recopila los datos del sensor y los muestra en una página HTML de manera dinámica, actualizando los valores cada segundo.
+Este es el código para crear un dispostivo IoT que muestra la temperatura y humedad en tiempo real, utilizando un sensor DHT22 conectado a un dispositivo ESP32. El programa recopila los datos del sensor y los muestra en una página HTML de manera dinámica, actualizando los valores cada 10 seg.
 
 ## Funcionamiento
 
