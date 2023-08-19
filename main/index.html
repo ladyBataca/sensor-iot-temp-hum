@@ -32,6 +32,14 @@
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
 
+        .notification{
+            text-align: left;
+            font-size: 20px;
+            margin-top: 50px;
+            color: #597;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
         /* Estilos para los iconos */
         .icon {
             font-size: 48px;
@@ -59,12 +67,19 @@
             <span id="humidity" class="value"></span>
             <span class="unit">%</span>
         </div>
-
+        
         <script>
             // JavaScript para actualizar los valores de temperatura y humedad
-            function updateData(temperature, humidity) {
+            function updateData(temperature, humidity, alarma) {
                 document.getElementById("temperature").innerText = temperature.toFixed(1);
                 document.getElementById("humidity").innerText = humidity.toFixed(1);
+                if (alarma.toFixed(1) == 1){
+                    document.getElementById("action").innerText = "Ventiladores On";
+                }
+                else if (alarma.toFixed(1) == 0){
+                    document.getElementById("action").innerText = "Ventiladores Off";
+                }
+                
             }
             // Actualización de datos en tiempo real
             setInterval(function() {
@@ -75,12 +90,18 @@
                     // Obtener los valores de temperatura y humedad del objeto
                     var temperature = response.temperature;
                     var humidity = response.humidity;
+                    var alarma = response.alarma;
 
                     // Actualizar los valores en la página HTML
-                    updateData(temperature, humidity);
+                    updateData(temperature, humidity, alarma);
                 });
             }, 5000); // Actualizar cada 1 min (ajustar según tus necesidades)
         </script>
+    </div>
+    <div>
+        <span class="notification">Accion:</span>
+        <i class="icon fas fa-bell"></i>
+        <span id="action" class="value"></span>
     </div>
 </body>
 </html>

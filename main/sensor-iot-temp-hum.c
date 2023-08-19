@@ -16,13 +16,22 @@ extern const char index_end[] asm("_binary_index_html_end");
 
 //----------Variables de captura de temperatura y humedad---------//
 float temperature = 0, humidity = 0;
+//------ Variables mock para enviar al index----------//
+int humgerm;
 
 //-----------Handler obtenerdatos---------//
 static esp_err_t data_sensor_get_handler(httpd_req_t *req) {
     
     httpd_resp_set_hdr(req, "Content-Type", "application/json");
-    char res[50];
-    sprintf(res, "{ \"humidity\": %f, \"temperature\": %f}", humidity, temperature);
+    char res[100];
+    if (humidity > 70) {
+        humgerm = 1; //"Riego aereo On";
+    }
+    else if (humidity<= 70) {
+        humgerm = 0; //"Riego aereo Off";
+    }
+
+    sprintf(res, "{ \"humidity\": %f, \"temperature\": %f, \"alarma\": %d}", humidity, temperature,humgerm);
     httpd_resp_send(req, res, HTTPD_RESP_USE_STRLEN);
     return ESP_OK;
 }
