@@ -1,6 +1,9 @@
 # Dispositivo IoT para Monitoreo de Temperatura y Humedad en Tiempo Real
 
-Este es el código para crear un dispostivo IoT que muestra la temperatura y humedad en tiempo real, utilizando un sensor DHT22 conectado a un dispositivo ESP32. El programa recopila los datos del sensor y los muestra en una página HTML de manera dinámica, actualizando los valores cada 10 seg.
+Este es el código para crear un dispostivo IoT que tenga la capacidad de controlar las acciones que permitan las condiciones ideales dentro de un invernadero con capacidad para abastecer  5 tipos de hortalizas a una familia en la región de los llanos. Mediante el  sensado de  la temperatura y la humedad en tiempo real, utilizando un sensor DHT22 conectado a un dispositivo ESP32  que ayudan a derminar el accionar de ventiladores, sistema de riego por neblina o sistema de riego por goteo conforme lo necesite el microclima del invernadero. 
+
+## Stage actual 
+El programa actualmente  recopila los datos del sensor y los muestra en una página HTML de manera dinámica, actualizando los valores cada 10 seg, adicionalmente notifica cuando los ventiladores son encendidos para que la humedad al interior del invernadero se disipe o el encendido del riego por neblina para que esta aumente a los niveles necesarios, segun la etapa de crecimiento de las plantas. Adicionalmete de agregó uba lista desplegable que da la opción de escoger dicha etapa (Solamente esta la lista, aun no se elabora el api que ejecuta las configuraciones necesarias).
 
 ## Funcionamiento
 
