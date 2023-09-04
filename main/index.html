@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitoreo de Temperatura y Humedad en tiempo real</title>
+    <title>SmartGrow Liwasi Modulo Unifamiliar</title>
     <style>
         /* Estilos para el contenedor principal */
         .container {
             text-align: center;
             margin-top: 50px;
-            font-family: 'Arial Narrow Bold';
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
 
         .title{
@@ -29,15 +29,36 @@
         .label {
             font-size: 20px;
             color: #597;
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+        
+        .notification{
+            font-size: 20px;
+            color:#e30337 ;
+            background: #c6ddde;
         }
 
-        .notification{
-            text-align: left;
-            font-size: 20px;
-            margin-top: 50px;
-            color: #597;
+        .containercolum{
+            display: flex;
+            flex-direction: row;
+            align-content: space-between;
+            flex-wrap: nowrap;
+            margin:  100px;
+            justify-content: center;
+            text-align: center;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 20px;
+        }
+
+        .notificationcontainer{ 
+            margin-right: 40px ;
+            color: #597;
+            column-gap: 20px;
+
+        }
+        .stagecontainer{
+            margin-left: 20px; 
+            color: #597;
+            justify-content: center;
         }
 
         /* Estilos para los iconos */
@@ -46,15 +67,31 @@
             color: #289;
             margin: 10px;
         }
+        /* estilos para el pop up*/
+
+        select {
+        margin-bottom: 80px;
+        margin-top: 10px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: medium;
+        outline: 0;
+        background: #c6ddde;
+        color:#6a9abf ;
+        border: 3px solid rgb(55, 92, 119);
+        padding: 8px;
+        border-radius: 15px;
+      }
     </style>
+
+        
     <!-- Incluir librería de iconos (FontAwesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Incluir jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
-<body>
+<body class ="body">
     <div class="container">
-        <h1>Temperatura y Humedad en Tiempo Real</h1>
+        <h1>SmartGrow Liwasi Modulo Unifamiliar</h1>
         <div>
             <span class="label">Temperatura:</span>
             <i class="icon fas fa-thermometer-half"></i>
@@ -98,10 +135,39 @@
             }, 5000); // Actualizar cada 1 min (ajustar según tus necesidades)
         </script>
     </div>
-    <div>
-        <span class="notification">Accion:</span>
-        <i class="icon fas fa-bell"></i>
-        <span id="action" class="value"></span>
+    <div class = containercolum>
+        <div class="notificationcontainer">
+            <i class="icon fas fa-bell"></i>
+            <span class="label">Accion:</span>
+            <span id="action" class="notification"></span>
+        </div>   
+
+        <div class = "stagecontainer">
+            <form action="#">
+                <i class="icon fa fa-seedling"></i>
+                <label for="stage">Selecciona una etapa:</label>
+                <select id="stage" onchange="enviarEtapa()">
+                    <option value="vegetativa">Vegetativa</option>
+                    <option value="germinacion">Germinación</option>
+                    <option value="floracion">Floración</option>
+                </select>
+            </form>    
+        </div>
     </div>
+    
+         
+    <!-- JavaScript para enviar la etapa seleccionada a través de una API -->
+    <script>
+        function enviarEtapa() {
+            var selectedEtapa = document.getElementById("stage").value;
+
+            // Enviar la etapa seleccionada a través de una solicitud a una API
+            $.post("/stage", { etapa: selectedEtapa }, function(response) {
+                // Manejar la respuesta de la API si es necesario
+                console.log(response);
+            });
+        }
+    </script> 
+    </div>  
 </body>
 </html>

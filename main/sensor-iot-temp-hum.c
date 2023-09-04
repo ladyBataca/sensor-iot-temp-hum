@@ -2,11 +2,9 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "string.h"
-#include "esp_wifi.h"
-#include "nvs_flash.h"
-#include "protocol_examples_common.h"
 #include "esp_http_server.h"
 #include "dht.h"
+#include "network.h"
 
 extern const char index_start[] asm("_binary_index_html_start");
 extern const char index_end[] asm("_binary_index_html_end");
@@ -88,29 +86,11 @@ void sensorDHT(void *pvParameters){
     }
 }
 
-esp_netif_t* network_interface_ini() {
-    nvs_flash_init();
-    esp_netif_init();
-    esp_event_loop_create_default();
-    
-    example_connect();
-    return esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
-}
-
 void app_main(void)
 {
-    esp_netif_ip_info_t ip_info;
-    esp_netif_t* netif = NULL;
-    
-    //-----Inicio de la interfaz de red--------//
-    netif =  network_interface_ini();
-    esp_netif_get_ip_info(netif, &ip_info);
-    printf("IP: %d.%d.%d.%d\n", IP2STR(&ip_info.ip));
-
-    if (netif == NULL) {
-        printf("No hay interfaz\n");
-    } else {
+    if (init_interface() == ESP_OK){
         xTaskCreate(sensorDHT, "sensorDHT", configMINIMAL_STACK_SIZE * 3, NULL, 5, NULL);
         web_server_init();
     }
+
 }
