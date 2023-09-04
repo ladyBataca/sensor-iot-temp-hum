@@ -1,4 +1,4 @@
-# Dispositivo IoT para Monitoreo de Temperatura y Humedad en Tiempo Real
+# SmartGrow Liwasi Modulo Unifamiliar
 
 Este es el código para crear un dispostivo IoT que tenga la capacidad de controlar las acciones que permitan las condiciones ideales dentro de un invernadero con capacidad para abastecer  5 tipos de hortalizas a una familia en la región de los llanos. Mediante el  sensado de  la temperatura y la humedad en tiempo real, utilizando un sensor DHT22 conectado a un dispositivo ESP32  que ayudan a derminar el accionar de ventiladores, sistema de riego por neblina o sistema de riego por goteo conforme lo necesite el microclima del invernadero. 
 
