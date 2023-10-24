@@ -2,7 +2,8 @@
 #include "network.h"
 
 static const char *TAG = "wifi";
-
+static char *RED = "poner el nombre de la red";
+static char *PASS = "contraseña de la red"; 
 wifi_config_t wifi_sta_config;
 wifi_config_t wifi_ap_config;
 
@@ -132,7 +133,7 @@ void WIFI_START(wifi_mode_t mode) {
 esp_err_t init_interface() {
     ///*
     WIFI_INIT();
-    STA_INIT_IP("Liwasi WiFi","liwasi-tech","192.168.1.150","192.168.1.1","255.255.255.0");
+    STA_INIT_IP(RED,PASS,"192.168.1.150","192.168.1.1","255.255.255.0");
     AP_INIT_IP("esp32_AP","password","192.168.254.1","192.168.254.1","255.255.255.0");
     WIFI_START(WIFI_MODE_STA); // WIFI_MODE_APSTA | WIFI_MODE_STA | WIFI_MODE_AP
     //*/
